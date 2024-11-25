@@ -1,0 +1,1052 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "student1",
+      "password": "student1",
+      "role": "student",
+      "linked_id": 1
+    },
+    {
+      "id": 2,
+      "username": "student2",
+      "password": "student2",
+      "role": "student",
+      "linked_id": 2
+    },
+    {
+      "id": 3,
+      "username": "teacher1",
+      "password": "teacher1",
+      "role": "teacher",
+      "linked_id": 1
+    },
+    {
+      "id": 4,
+      "username": "teacher2",
+      "password": "teacher2",
+      "role": "teacher",
+      "linked_id": 2
+    }
+  ],
+  "info_students": [
+    {
+      "id": 1,
+      "name": "Từ Nguyễn Duy Long",
+      "class": "46K14",
+      "enrolledSubjects": [
+        "Phân tích và thiết kế hệ thống thông tin",
+        "Quản trị cơ sở dữ liệu",
+        "Lập trình Web",
+        "Cơ sở lập trình",
+        "Thực hành quản trị cơ sở dữ liệu"
+      ],
+      "enrolledSemesters": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Nguyễn Văn Tấn",
+      "class": "46K14",
+      "enrolledSubjects": [
+        "Phân tích và thiết kế hệ thống thông tin",
+        "Quản trị cơ sở dữ liệu",
+        "Lập trình Web",
+        "Cơ sở lập trình",
+        "Thực hành quản trị cơ sở dữ liệu"
+      ],
+      "enrolledSemesters": [
+        1,
+        2
+      ]
+    }
+  ],
+  "info_teachers": [
+    {
+      "id": 1,
+      "name": "Gv. Nguyễn Văn A",
+      "enrolledSubjects": [
+        "Cơ sở lập trình",
+        "Quản trị cơ sở dữ liệu",
+        "Thực hành quản trị cơ sở dữ liệu",
+        "Lập trình Web"
+      ],
+      "enrolledSemesters": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Gv. Trần Thị B",
+      "enrolledSubjects": [
+        "Cơ sở lập trình",
+        "Quản trị cơ sở dữ liệu",
+        "Thực hành quản trị cơ sở dữ liệu",
+        "Lập trình Web"
+      ],
+      "enrolledSemesters": [
+        1,
+        2
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "name": "Cơ sở lập trình",
+      "teachers": [
+        1
+      ],
+      "students": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "Quản trị cơ sở dữ liệu",
+      "teachers": [
+        1
+      ],
+      "students": [
+        1,
+        2
+      ]
+    }
+  ],
+  "semesters": [
+    {
+      "semestersID": "Ky1-24-25",
+      "semestersName": "Học kỳ 1 năm học 2024 - 2025"
+    },
+    {
+      "semestersID": "Ky2-24-25",
+      "semestersName": "Học kỳ 2 năm học 2024 - 2025"
+    }
+  ],
+  "timetable": [
+    {
+      "timetable": [
+        {
+          "courseClassID": "mis3008_46K14",
+          "courseClassName": "Quản trị cơ sở dữ liệu (mis3008_46K14)",
+          "subjectID": "mis3008",
+          "subjectsName": "Quản trị cơ sở dữ liệu",
+          "numberOfCredits": 3,
+          "weekStart": 4,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Thị B",
+          "roomName": "A203",
+          "classPeriodName": "1, 2, 3",
+          "dayOfWeekName": "Thứ 2",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        },
+        {
+          "courseClassID": "mis3010_46K14",
+          "courseClassName": "Lập trình Web (mis3010_46K14)",
+          "subjectID": "mis3010",
+          "subjectsName": "Lập trình Web",
+          "numberOfCredits": 3,
+          "weekStart": 4,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Văn H",
+          "roomName": "E203",
+          "classPeriodName": "7, 8, 9",
+          "dayOfWeekName": "Thứ 3",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        },
+        {
+          "courseClassID": "mis3007_46K14",
+          "courseClassName": "Phân tích và thiết kế hệ thống thông tin (mis3007_46K14)",
+          "subjectID": "mis3007",
+          "subjectsName": "Phân tích và thiết kế hệ thống thông tin",
+          "numberOfCredits": 3,
+          "weekStart": 4,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Văn G",
+          "roomName": "A203",
+          "classPeriodName": "4, 5, 6",
+          "dayOfWeekName": "Thứ 2",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        },
+        {
+          "courseClassID": "mis3009_46K14",
+          "courseClassName": "Thực hành quản trị cơ sở dữ liệu (mis3009_46K14)",
+          "subjectID": "mis3009",
+          "subjectsName": "Thực hành quản trị cơ sở dữ liệu",
+          "numberOfCredits": 3,
+          "weekStart": 5,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Văn G",
+          "roomName": "E203",
+          "classPeriodName": "4, 5, 6",
+          "dayOfWeekName": "Thứ 3",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        },
+        {
+          "courseClassID": "mis3008_46K14",
+          "courseClassName": "Quản trị cơ sở dữ liệu (mis3008_46K14)",
+          "subjectID": "mis3008",
+          "subjectsName": "Quản trị cơ sở dữ liệu",
+          "numberOfCredits": 3,
+          "weekStart": 4,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 2 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Thị B",
+          "roomName": "A203",
+          "classPeriodName": "1, 2, 3",
+          "dayOfWeekName": "Thứ 2",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        },
+        {
+          "courseClassID": "mis3010_46K14",
+          "courseClassName": "Lập trình Web (mis3010_46K14)",
+          "subjectID": "mis3010",
+          "subjectsName": "Lập trình Web",
+          "numberOfCredits": 3,
+          "weekStart": 4,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 2 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Văn H",
+          "roomName": "E203",
+          "classPeriodName": "7, 8, 9",
+          "dayOfWeekName": "Thứ 3",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        },
+        {
+          "courseClassID": "mis3007_46K14",
+          "courseClassName": "Phân tích và thiết kế hệ thống thông tin (mis3007_46K14)",
+          "subjectID": "mis3007",
+          "subjectsName": "Phân tích và thiết kế hệ thống thông tin",
+          "numberOfCredits": 3,
+          "weekStart": 4,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 2 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Văn K",
+          "roomName": "A203",
+          "classPeriodName": "4, 5, 6",
+          "dayOfWeekName": "Thứ 2",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        },
+        {
+          "courseClassID": "mis3009_46K14",
+          "courseClassName": "Thực hành quản trị cơ sở dữ liệu (mis3009_46K14)",
+          "subjectID": "mis3009",
+          "subjectsName": "Thực hành quản trị cơ sở dữ liệu",
+          "numberOfCredits": 3,
+          "weekStart": 5,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 2 năm học 2024 - 2025",
+          "teacherName": "Nguyễn Văn L",
+          "roomName": "E203",
+          "classPeriodName": "4, 5, 6",
+          "dayOfWeekName": "Thứ 6",
+          "note": "",
+          "students": [
+            "student1",
+            "student2"
+          ]
+        }
+      ]
+    }
+  ],
+  "examSchedule": [
+    {
+      "subjectID": "mis3007",
+      "semesterName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectname": "Phân tích và thiết kế hệ thống thông tin",
+      "startTime": "13:30:00",
+      "endTime": "00:00:00",
+      "examDate": "2025-02-01T00:00:00",
+      "roomName": "A102",
+      "examTypeName": "Tự luận",
+      "duration": "90 phut",
+      "students": [
+        "student1",
+        "student2"
+      ]
+    },
+    {
+      "subjectID": "mis3008",
+      "semesterName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectname": "Quản trị cơ sở dữ liệu",
+      "startTime": "07:30:00",
+      "endTime": "00:00:00",
+      "examDate": "2025-01-31T00:00:00",
+      "roomName": "E203",
+      "examTypeName": "Trắc nghiệm",
+      "duration": "90 phut",
+      "students": [
+        "student1",
+        "student2"
+      ]
+    },
+    {
+      "subjectID": "mis3010",
+      "semesterName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectname": "Lập trình Web",
+      "startTime": "15:30:00",
+      "endTime": "00:00:00",
+      "examDate": "2025-02-02T00:00:00",
+      "roomName": "E203",
+      "examTypeName": "Tự luận",
+      "duration": "90 phut",
+      "students": [
+        "student1",
+        "student2"
+      ]
+    }
+  ],
+  "tea_timetable": [
+    {
+      "tea_timetable": [
+        {
+          "courseClassID": "mis3007_46K14",
+          "courseClassName": "Phân tích và thiết kế hệ thống thông tin (mis3007_46K14)",
+          "subjectID": "mis3007",
+          "subjectsName": "Phân tích và thiết kế hệ thống thông tin",
+          "numberOfCredits": 3,
+          "weekStart": 4,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+          "roomName": "A203",
+          "classPeriodName": "4, 5, 6",
+          "dayOfWeekName": "Thứ 2",
+          "note": "",
+          "teachers": [
+            "teacher1"
+          ]
+        },
+        {
+          "courseClassID": "mis3009_46K14",
+          "courseClassName": "Thực hành quản trị cơ sở dữ liệu (mis3009_46K14)",
+          "subjectID": "mis3009",
+          "subjectsName": "Thực hành quản trị cơ sở dữ liệu",
+          "numberOfCredits": 3,
+          "weekStart": 5,
+          "weekEnd": 18,
+          "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+          "roomName": "E203",
+          "classPeriodName": "4, 5, 6",
+          "dayOfWeekName": "Thứ 3",
+          "note": "",
+          "teachers": [
+            "teacher1"
+          ]
+        }
+      ]
+    }
+  ],
+  "tea_examSchedule": [
+    {
+      "subjectID": "mis3001",
+      "semesterName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectname": "Cơ sở lập trình",
+      "startTime": "15:30:00",
+      "endTime": "17:00:00",
+      "examDate": "2025-02-03T00:00:00",
+      "roomName": "A102",
+      "examTypeName": "Tự luận",
+      "duration": "90 phút",
+      "teachers": [
+        "teacher1",
+        "teacher2"
+      ]
+    },
+    {
+      "subjectID": "mis3008",
+      "semesterID": 1,
+      "semesterName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectname": "Quản trị cơ sở dữ liệu",
+      "startTime": "07:30:00",
+      "endTime": "09:00:00",
+      "examDate": "2025-01-31T00:00:00",
+      "roomName": "E203",
+      "examTypeName": "Trắc nghiệm",
+      "duration": "90 phút",
+      "teachers": [
+        "teacher1",
+        "teacher2"
+      ]
+    },
+    {
+      "subjectID": "mis3009",
+      "semesterID": 1,
+      "semesterName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectname": "Thực hành quản trị cơ sở dữ liệu",
+      "startTime": "09:30:00",
+      "endTime": "11:00:00",
+      "examDate": "2025-01-31T00:00:00",
+      "roomName": "E103",
+      "examTypeName": "Tự luận",
+      "duration": "90 phút",
+      "teachers": [
+        "teacher1",
+        "teacher2"
+      ]
+    },
+    {
+      "subjectID": "mis3010",
+      "semesterID": 1,
+      "semesterName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectname": "Lập trình Web",
+      "startTime": "15:30:00",
+      "endTime": "17:00:00",
+      "examDate": "2025-02-02T00:00:00",
+      "roomName": "E203",
+      "examTypeName": "Tự luận",
+      "duration": "90 phút",
+      "teachers": [
+        "teacher1",
+        "teacher2"
+      ]
+    }
+  ],
+  "Notice_of_leave": [
+    {
+      "adjustmentID": 1,
+      "courseClassID": "mis3007_46K14",
+      "subjectName": "Phân tích và thiết kế hệ thống thông tin",
+      "reason": "string",
+      "createdDate": "2024-11-19T16:11:49.593",
+      "createdBy": "Nguyễn Văn G",
+      "weekOff": 9,
+      "classPeriodName": "4,5,6",
+      "dayofWeekName": "Thứ 2",
+      "isDeleted": false
+    }
+  ],
+  "Notice_of_com": [
+    {
+      "adjustmentID": 1,
+      "courseClassID": "mis3007_46K14",
+      "subjectName": "Phân tích và thiết kế hệ thống thông tin",
+      "reason": "string",
+      "createdDate": "2024-11-19T16:11:49.593",
+      "createdBy": "Nguyễn Văn G",
+      "weekOff": 9,
+      "classPeriodName": "4,5,6",
+      "dayofWeekName": "Thứ 2",
+      "isDeleted": false
+    }
+  ],
+  "Tea_View_Created_Notice_of_leave": [
+    {
+      "adjustmentID": 1,
+      "courseClassID": "mis3007_46K14",
+      "subjectName": "Phân tích và thiết kế hệ thống thông tin",
+      "reason": "string",
+      "createdDate": "2024-11-19T16:11:49.593",
+      "createdBy": "Nguyễn Văn G",
+      "weekOff": 9,
+      "classPeriodName": "4,5,6",
+      "dayofWeekName": "Thứ 2",
+      "isDeleted": false
+    }
+  ],
+  "Tea_View_Created_Notice_of_com": [
+    {
+      "adjustmentID": 1,
+      "courseClassID": "mis3007_46K14",
+      "subjectName": "Phân tích và thiết kế hệ thống thông tin",
+      "reason": "string",
+      "createdDate": "2024-11-19T16:11:49.593",
+      "createdBy": "Nguyễn Văn G",
+      "weekOff": 9,
+      "classPeriodName": "4,5,6",
+      "dayofWeekName": "Thứ 2",
+      "isDeleted": false
+    }
+  ],
+  "Tea_list_course_semeter": [
+    {
+      "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectsID": "mis3007",
+      "subjectsName": "Cơ sở lập trình",
+      "numberOfCredits": 1,
+      "weekStart": 4,
+      "weekEnd": 18,
+      "majorName": "CSLT",
+      "teachers": [
+        "teacher1"
+      ],
+      "students": [
+        "student1",
+        "student2"
+      ],
+      "classes": [
+        {
+          "className": "46K14",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 2",
+              "classPeriod": "1,2,3",
+              "room": "A101"
+            }
+          ]
+        },
+        {
+          "className": "46K21",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 3",
+              "classPeriod": "1,2,3",
+              "room": "A201"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectsID": "mis3009",
+      "subjectsName": "Quản trị cơ sở dữ liệu",
+      "numberOfCredits": 2,
+      "weekStart": 5,
+      "weekEnd": 18,
+      "majorName": "QTCSDL",
+      "teachers": [
+        "teacher1"
+      ],
+      "students": [
+        "student1",
+        "student2"
+      ],
+      "classes": [
+        {
+          "className": "46K14",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 3",
+              "classPeriod": "4,5,6",
+              "room": "D101"
+            }
+          ]
+        },
+        {
+          "className": "46K21.1",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 5",
+              "classPeriod": "1,2,3",
+              "room": "E201"
+            }
+          ]
+        },
+        {
+          "className": "46K21.2",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 7",
+              "classPeriod": "1,2,3",
+              "room": "D101"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectsID": "mis3009",
+      "subjectsName": "Thực hành quản trị cơ sở dữ liệu",
+      "numberOfCredits": 3,
+      "weekStart": 5,
+      "weekEnd": 18,
+      "majorName": "THQTCSDL",
+      "teachers": [
+        "teacher1"
+      ],
+      "students": [
+        "student1",
+        "student2"
+      ],
+      "classes": [
+        {
+          "className": "46K14",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 6",
+              "classPeriod": "1,2,3",
+              "room": "A101"
+            }
+          ]
+        },
+        {
+          "className": "46K21",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 7",
+              "classPeriod": "1,2,3",
+              "room": "A201"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "semestersName": "Học kỳ 1 năm học 2024 - 2025",
+      "subjectsID": "mis3009",
+      "subjectsName": "Lập trình Web",
+      "numberOfCredits": 4,
+      "weekStart": 5,
+      "weekEnd": 18,
+      "majorName": "LTW",
+      "teachers": [
+        "teacher1"
+      ],
+      "students": [
+        "student1",
+        "student2"
+      ],
+      "classes": [
+        {
+          "className": "46K14",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 6",
+              "classPeriod": "1,2,3",
+              "room": "A101"
+            }
+          ]
+        },
+        {
+          "className": "46K21",
+          "schedule": [
+            {
+              "dayOfWeek": "Thứ 7",
+              "classPeriod": "1,2,3",
+              "room": "A201"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "semestersName": "Học kỳ 2 năm học 2024 - 2025",
+      "subjectsID": "mis3009",
+      "subjectsName": "",
+      "numberOfCredits": 4,
+      "weekStart": 5,
+      "weekEnd": 18,
+      "majorName": "",
+      "teachers": [
+        "teacher1"
+      ],
+      "students": [
+        "student1",
+        "student2"
+      ],
+      "classes": [
+        "46K21.1"
+      ]
+    }
+  ],
+  "Tea_list_class_semeter": [
+    {
+      "courseClassID": "mis3007_46K14",
+      "courseClassName": "Phân tích và thiết kế hệ thống thông tin (mis3007_46K14)",
+      "departmentName": "Thống kê - Tin học",
+      "semestersName": "Học kỳ 1 năm học 2024 - 2025"
+    }
+  ],
+  "Tea_list_dayofweek": [
+    {
+      "dayofWeeksID": "T2",
+      "dayofWeeksName": "Thứ 2",
+      "teachers": [
+        {
+          "name": "teacher1",
+          "periods": "1-12"
+        },
+        {
+          "name": "teacher2",
+          "periods": "1-12"
+        }
+      ]
+    },
+    {
+      "dayofWeeksID": "T3",
+      "dayofWeeksName": "Thứ 3",
+      "teachers": [
+        {
+          "name": "teacher1",
+          "periods": "1-12"
+        },
+        {
+          "name": "teacher2",
+          "periods": "1-12"
+        }
+      ]
+    },
+    {
+      "dayofWeeksID": "T4",
+      "dayofWeeksName": "Thứ 4",
+      "teachers": [
+        {
+          "name": "teacher1",
+          "periods": "1-12"
+        },
+        {
+          "name": "teacher2",
+          "periods": "1-12"
+        }
+      ]
+    },
+    {
+      "dayofWeeksID": "T5",
+      "dayofWeeksName": "Thứ 5",
+      "teachers": [
+        {
+          "name": "teacher1",
+          "periods": "1-12"
+        },
+        {
+          "name": "teacher2",
+          "periods": "1-12"
+        }
+      ]
+    },
+    {
+      "dayofWeeksID": "T6",
+      "dayofWeeksName": "Thứ 6",
+      "teachers": [
+        {
+          "name": "teacher1",
+          "periods": "1-12"
+        },
+        {
+          "name": "teacher2",
+          "periods": "1-12"
+        }
+      ]
+    },
+    {
+      "dayofWeeksID": "T7",
+      "dayofWeeksName": "Thứ 7",
+      "teachers": [
+        {
+          "name": "teacher2",
+          "periods": "1-12"
+        }
+      ]
+    },
+    {
+      "dayofWeeksID": "CN",
+      "dayofWeeksName": "Chủ nhật",
+      "teachers": []
+    }
+  ],
+  "classrooms": [
+    {
+      "id": "A101",
+      "name": "A101",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A102",
+      "name": "A102",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A103",
+      "name": "A103",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A104",
+      "name": "A104",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A105",
+      "name": "A105",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A105",
+      "name": "A106",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A106",
+      "name": "A106",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A107",
+      "name": "A107",
+      "teacher": [
+        "teacher1"
+      ]
+    },
+    {
+      "id": "A108",
+      "name": "A108",
+      "teacher": [
+        "teacher1"
+      ]
+    }
+  ],
+  "period_dayOfweek": [
+    {
+      "classPeriodID": "T1",
+      "classPeriodName": "Tiết 1"
+    },
+    {
+      "classPeriodID": "T2",
+      "classPeriodName": "Tiết 2"
+    },
+    {
+      "classPeriodID": "T3",
+      "classPeriodName": "Tiết 3"
+    },
+    {
+      "classPeriodID": "T4T2",
+      "classPeriodName": "Tiết 4"
+    },
+    {
+      "classPeriodID": "T5",
+      "classPeriodName": "Tiết 5"
+    },
+    {
+      "classPeriodID": "T6",
+      "classPeriodName": "Tiết 6"
+    },
+    {
+      "classPeriodID": "T7",
+      "classPeriodName": "Tiết 7"
+    },
+    {
+      "classPeriodID": "T8",
+      "classPeriodName": "Tiết 8"
+    },
+    {
+      "classPeriodID": "T9",
+      "classPeriodName": "Tiết 9"
+    },
+    {
+      "classPeriodID": "T10",
+      "classPeriodName": "Tiết 10"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "studentId": "student1",
+      "course": "Phân tích và thiết kế hệ thống thông tin",
+      "class": "46K14",
+      "room": "A101",
+      "week": "4",
+      "dayOfWeek": "2",
+      "classPeriod": "1,2,3",
+      "note": "Thông báo nghỉ",
+      "createdAt": "2024-11-20T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "studentId": "student2",
+      "course": "Thực hành quản trị cơ sở dữ liệu",
+      "class": "46K21",
+      "room": "D102",
+      "week": "5",
+      "dayOfWeek": "2",
+      "classPeriod": "1,2,3",
+      "note": "Thông báo nghỉ",
+      "createdAt": "2024-11-21T12:00:00Z"
+    },
+    {
+      "course": "Phân tích và thiết kế hệ thống thông tin",
+      "class": "46K14",
+      "room": "A201",
+      "week": "6",
+      "dayOfWeek": "2",
+      "classPeriod": "1, 2, 3",
+      "note": "cfddd",
+      "createdAt": "2024-11-23T04:47:58.440Z",
+      "id": 3
+    },
+    {
+      "course": "Cơ sở lập trình",
+      "class": "46K14",
+      "room": "A101",
+      "week": "11",
+      "dayOfWeek": "Thứ 2",
+      "classPeriod": "1,2,3",
+      "note": "ddd",
+      "createdAt": "2024-11-23T06:07:37.062Z",
+      "id": 4
+    },
+    {
+      "course": "Cơ sở lập trình",
+      "class": "46K14",
+      "room": "A101",
+      "week": "5",
+      "dayOfWeek": "Thứ 2",
+      "classPeriod": "1,2,3",
+      "note": "giảng viên bận",
+      "createdAt": "2024-11-23T08:30:28.350Z",
+      "id": 5
+    }
+  ],
+  "notifications_com": [
+    {
+      "id": 1,
+      "studentId": "student1",
+      "course": "Phân tích và thiết kế hệ thống thông tin",
+      "class": "46K14",
+      "room": "C101",
+      "week": "4",
+      "dayOfWeek": "2",
+      "classPeriod": "1,2,3",
+      "note": "Thông báo bù lịch",
+      "createdAt": "2024-11-20T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "studentId": "student2",
+      "course": "Thực hành quản trị cơ sở dữ liệu",
+      "class": "46K21",
+      "room": "G102",
+      "week": "5",
+      "dayOfWeek": "2",
+      "classPeriod": "1.2,3",
+      "note": "Thông báo bù lịch",
+      "createdAt": "2024-11-21T12:00:00Z"
+    },
+    {
+      "course": "Phân tích và thiết kế hệ thống thông tin",
+      "class": "46K14",
+      "room": "A203",
+      "week": "3",
+      "dayOfWeek": "3",
+      "classPeriod": "4,5,6",
+      "note": "Báo bù môn học đó !!!!",
+      "createdAt": "2024-11-21T13:42:44.044Z",
+      "id": 3
+    },
+    {
+      "course": "Phân tích và thiết kế hệ thống thông tin",
+      "class": "46K14",
+      "room": "A201",
+      "week": "6",
+      "dayOfWeek": "2",
+      "classPeriod": "1, 2, 3",
+      "note": "update calander",
+      "createdAt": "2024-11-22T04:05:02.668Z",
+      "id": 4
+    },
+    {
+      "course": "Cơ sở lập trình",
+      "class": "46K14",
+      "classRoom": "A201",
+      "week": "4",
+      "dayOfWeek": "T4",
+      "classPeriod": "1,2,3",
+      "note": "Bù môn",
+      "createdAt": "2024-11-23T08:33:49.174Z",
+      "id": 5
+    },
+    {
+      "course": "Cơ sở lập trình",
+      "class": "46K14",
+      "classRoom": "A201",
+      "week": "4",
+      "dayOfWeek": "T2",
+      "classPeriod": "1,2,3",
+      "note": "được không",
+      "createdAt": "2024-11-23T08:51:36.812Z",
+      "id": 6
+    },
+    {
+      "course": "Cơ sở lập trình",
+      "class": "46K14",
+      "classRoom": "A102",
+      "week": "10",
+      "dayOfWeek": "T3",
+      "classPeriods": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "note": "Sinh viên mang theo laptop",
+      "createdAt": "2024-11-25T09:53:34.804Z",
+      "id": 7
+    },
+    {
+      "course": "Cơ sở lập trình",
+      "class": "46K14",
+      "classRoom": "A104",
+      "week": "10",
+      "dayOfWeek": "Thứ 3",
+      "classPeriods": [
+        "T1"
+      ],
+      "note": "xem thứ ",
+      "createdAt": "2024-11-25T09:59:43.567Z",
+      "id": 8
+    },
+    {
+      "course": "Cơ sở lập trình",
+      "class": "46K14",
+      "classRoom": "A102",
+      "week": "10",
+      "dayOfWeek": "Thứ 3",
+      "classPeriods": [
+        "T1",
+        "T2",
+        "T3"
+      ],
+      "note": "xem có hiện số tiết chưa",
+      "createdAt": "2024-11-25T10:06:29.599Z",
+      "id": 9
+    }
+  ]
+}
