@@ -4,34 +4,20 @@ import Logo from '../../assets/images/logo.png';
 import User from '../../assets/images/user.png';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Login from './Login/Login';
+import { useUser } from './Login/UserContext'; // Import useUser từ context
 
-const Header = ({ setRole }) => {
+const Header = () => {
     const [showLogin, setShowLogin] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [username, setUsername] = useState('');
+    const { user, logout } = useUser(); // Lấy thông tin từ context
     const navigate = useNavigate();
 
     const toggleLogin = () => {
         setShowLogin(prevState => !prevState);
     };
 
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        const savedUsername = localStorage.getItem('username'); // Lấy username từ localStorage
-        if (token && savedUsername) {
-            setIsLoggedIn(true);
-            setUsername(savedUsername);
-        }
-    }, []);
-
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('role');
-        localStorage.removeItem('username');
-        setIsLoggedIn(false);
-        setUsername('');
-        setRole(null);
-        navigate('/');
+        logout(); // Xóa user trong context
+        navigate('/'); // Chuyển hướng về trang chủ
     };
 
     return (
@@ -49,10 +35,10 @@ const Header = ({ setRole }) => {
                         <img src={User} alt="User Avatar" className="avatar" />
                     </div>
                     <div className="username">
-                        {isLoggedIn && username && <div className='display_username'>{username}</div>}
+                        {user && <div className='display_username'>{user.username}</div>}
                     </div>
-                    <button onClick={isLoggedIn ? handleLogout : toggleLogin} className='header_login'>
-                        {isLoggedIn ? 'ĐĂNG XUẤT' : 'ĐĂNG NHẬP'}
+                    <button onClick={user ? handleLogout : toggleLogin} className='header_login'>
+                        {user ? 'ĐĂNG XUẤT' : 'ĐĂNG NHẬP'}
                     </button>
                 </div>
             </div>
@@ -74,11 +60,7 @@ const Header = ({ setRole }) => {
                 </div>
             </div>
 
-            {showLogin && <Login onClose={() => setShowLogin(false)} onLoginSuccess={(username) => {
-                setIsLoggedIn(true);
-                setUsername(username);
-                localStorage.setItem('username', username);
-            }} />}
+            {showLogin && <Login onClose={() => setShowLogin(false)} />}
         </nav>
     );
 };

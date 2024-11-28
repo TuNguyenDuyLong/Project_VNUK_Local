@@ -3,143 +3,111 @@ import './Tea_CreateNoteti.scss';
 import { Link } from 'react-router-dom';
 
 const Tea_CreateNoteti = () => {
-    const [semesters, setSemesters] = useState([]); // Danh sách học kỳ
-    const [selectedSemester, setSelectedSemester] = useState(''); // Học kỳ đã chọn
-    const [courses, setCourses] = useState([]); // Danh sách tất cả môn học
-    const [filteredCourses, setFilteredCourses] = useState([]); // Môn học lọc theo học kỳ và giảng viên
-    const [selectedCourse, setSelectedCourse] = useState(''); // Môn học đã chọn
-    const [classes, setClasses] = useState([]); // Lớp học của môn đã chọn
-    const [selectedClass, setSelectedClass] = useState(''); // Lớp học đã chọn
+    const [semesters, setSemesters] = useState([]);
+    const [selectedSemester, setSelectedSemester] = useState('');
+    const [courses, setCourses] = useState([]);
+    const [filteredCourses, setFilteredCourses] = useState([]);
+    const [selectedCourse, setSelectedCourse] = useState('');
+    const [classes, setClasses] = useState([]);
+    const [selectedClass, setSelectedClass] = useState('');
+    const [room, setRoom] = useState('');
+    const [week, setWeek] = useState('');
+    const [dayOfWeek, setDayOfWeek] = useState('');
+    const [classPeriod, setClassPeriod] = useState('');
+    const [note, setNote] = useState('');
+    const [notifications, setNotifications] = useState([]);
 
-    const [room, setRoom] = useState(''); // Phòng học
-    const [week, setWeek] = useState(''); // Tuần
-    const [dayOfWeek, setDayOfWeek] = useState(''); // Thứ
-    const [classPeriod, setClassPeriod] = useState(''); // Tiết học
-    const [note, setNote] = useState(''); // Ghi chú
-    const [notifications, setNotifications] = useState([]); // Danh sách thông báo
-
-    // Lấy tên giảng viên từ localStorage
     const username = localStorage.getItem('username');
-    const currentTeacher = username; // Giảng viên hiện tại từ localStorage
 
     useEffect(() => {
-        fetchSemesters(); // Fetch học kỳ
-        fetchCourses(); // Fetch môn học
-        fetchNotifications(); // Lấy danh sách thông báo đã tạo
+        fetchSemesters();
     }, []);
 
     const fetchSemesters = async () => {
-        const response = await fetch('http://localhost:5000/semesters');
-        const data = await response.json();
-        setSemesters(data);
-    };
-
-    const fetchCourses = async () => {
-        const response = await fetch('http://localhost:5000/Tea_list_course_semeter');
-        const data = await response.json();
-        setCourses(data);
-    };
-
-    const fetchNotifications = async () => {
-        const response = await fetch('http://localhost:5000/notifications');
-        const data = await response.json();
-        setNotifications(data); // Cập nhật danh sách thông báo
-    };
-
-    // Lọc học kỳ mà giảng viên dạy
-    const getTeacherSemesters = () => {
-        return semesters.filter(semester =>
-            courses.some(course => course.teachers.includes(currentTeacher) && course.semestersName === semester.semestersName)
-        );
-    };
-
-    // Lọc môn học của giảng viên theo học kỳ
-    const handleSemesterChange = (e) => {
-        const selectedSemester = e.target.value;
-        setSelectedSemester(selectedSemester);
-
-        // Reset môn học và lớp học khi học kỳ thay đổi
-        setSelectedCourse('');
-        setFilteredCourses([]);
-        setClasses([]);
-        setSelectedClass('');
-
-        // Lọc môn học của giảng viên theo học kỳ
-        const filtered = courses.filter(course =>
-            course.teachers.includes(currentTeacher) && course.semestersName === selectedSemester
-        );
-        setFilteredCourses(filtered);
-    };
-
-    // Lọc lớp học theo môn học đã chọn
-    const handleCourseChange = (e) => {
-        const selectedCourseID = e.target.value;
-        setSelectedCourse(selectedCourseID);
-
-        // Reset lớp học khi môn học thay đổi
-        setClasses([]);
-        setSelectedClass('');
-
-        // Lọc lớp học theo môn học đã chọn
-        const selectedCourseData = courses.find(course => course.subjectsID === selectedCourseID);
-        setClasses(selectedCourseData ? selectedCourseData.classes : []);
-    };
-
-    // Xử lý khi lớp học thay đổi
-    const handleClassChange = (e) => {
-        const selectedClassName = e.target.value;
-        setSelectedClass(selectedClassName);
-
-        // Tìm lịch học của lớp đã chọn
-        const selectedClassData = filteredCourses.find(course =>
-            course.classes.some(cls => cls.className === selectedClassName)
-        )?.classes.find(cls => cls.className === selectedClassName);
-
-        if (selectedClassData && selectedClassData.schedule.length > 0) {
-            const schedule = selectedClassData.schedule[0];
-            setDayOfWeek(schedule.dayOfWeek || '');
-            setClassPeriod(schedule.classPeriod || '');
-            setRoom(schedule.room || '');
-        } else {
-            setDayOfWeek('');
-            setClassPeriod('');
-            setRoom('');
+        try {
+            const response = await fetch('http://localhost:5000/semesters');
+            const data = await response.json();
+            setSemesters(data);
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách học kỳ:", error);
         }
     };
 
-    // Gửi thông báo đến server (lưu thông báo vào cơ sở dữ liệu)
-    const saveNotification = async (newNotification) => {
-        const response = await fetch('http://localhost:5000/notifications', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newNotification),
-        });
-        const data = await response.json();
-        setNotifications(prevNotifications => [...prevNotifications, data]); // Cập nhật danh sách thông báo sau khi lưu
+    const fetchCourses = async (semesterID) => {
+        try {
+            const response = await fetch(`http://localhost:5000/Tea_list_course_semeter?semesterID=${semesterID}`);
+            const data = await response.json();
+            setCourses(data);
+            setFilteredCourses(data);
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách môn học:", error);
+        }
     };
 
-    // Xử lý khi tạo thông báo
-    const handleSubmit = (e) => {
+    const fetchClasses = async (courseID) => {
+        try {
+            const response = await fetch(`http://localhost:5000/Tea_list_classCousre?courseID=${courseID}`);
+            const data = await response.json();
+            setClasses(data);
+        } catch (error) {
+            console.error("Lỗi khi lấy danh sách lớp học:", error);
+        }
+    };
+
+    const handleSemesterChange = (e) => {
+        const semesterID = e.target.value;
+        setSelectedSemester(semesterID);
+
+        setSelectedCourse('');
+        setSelectedClass('');
+        setClasses([]);
+        setFilteredCourses([]);
+        fetchCourses(semesterID);
+    };
+
+    const handleCourseChange = (e) => {
+        const courseID = e.target.value;
+        setSelectedCourse(courseID);
+
+        setSelectedClass('');
+        setClasses([]);
+        fetchClasses(courseID);
+    };
+
+    const handleClassChange = (e) => {
+        setSelectedClass(e.target.value); // Cập nhật lớp học đã chọn
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Tìm tên môn học từ filteredCourses
-        const selectedCourseName = filteredCourses.find(course => course.subjectsID === selectedCourse)?.subjectsName;
+        const selectedCourseName = courses.find(course => course.subjectsID === selectedCourse)?.subjectsName;
 
         const newNotification = {
-            course: selectedCourseName, // Lưu tên môn học thay vì mã môn học
+            course: selectedCourseName,
             class: selectedClass,
             room,
             week,
             dayOfWeek,
             classPeriod,
             note,
-            createdAt: new Date().toISOString() // Thêm ngày tạo thông báo
+            createdAt: new Date().toISOString(),
         };
 
-        // Lưu thông báo vào server
-        saveNotification(newNotification).then(() => {
+        try {
+            const response = await fetch('http://localhost:5000/notifications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newNotification),
+            });
+
+            if (!response.ok) throw new Error("Lưu thông báo thất bại.");
+
+            const data = await response.json();
+            setNotifications(prevNotifications => [...prevNotifications, data]);
+
             alert("Thông báo đã được tạo thành công!");
             setSelectedSemester('');
             setSelectedCourse('');
@@ -149,9 +117,10 @@ const Tea_CreateNoteti = () => {
             setDayOfWeek('');
             setClassPeriod('');
             setNote('');
-        }).catch(() => {
+        } catch (error) {
             alert("Có lỗi xảy ra khi tạo thông báo. Vui lòng thử lại!");
-        });
+            console.error(error);
+        }
     };
 
     return (
@@ -170,7 +139,7 @@ const Tea_CreateNoteti = () => {
                                     required
                                 >
                                     <option value="" disabled>Chọn học kỳ</option>
-                                    {getTeacherSemesters().map(semester => (
+                                    {semesters.map(semester => (
                                         <option key={semester.semestersID} value={semester.semestersName}>
                                             {semester.semestersName}
                                         </option>
@@ -201,18 +170,23 @@ const Tea_CreateNoteti = () => {
                                 <select
                                     id="class"
                                     value={selectedClass}
-                                    onChange={handleClassChange}
+                                    onChange={handleClassChange}  // Đã định nghĩa hàm này
                                     required
                                     disabled={!selectedCourse}
                                 >
                                     <option value="" disabled>Chọn lớp dạy</option>
-                                    {classes.map((classItem, index) => (
-                                        <option key={index} value={classItem.className}>
-                                            {classItem.className}
-                                        </option>
-                                    ))}
+                                    {classes.length > 0 ? (
+                                        classes.map((classItem) => (
+                                            <option key={classItem.courseClassID} value={classItem.courseClassID}>
+                                                {classItem.courseClassName}
+                                            </option>
+                                        ))
+                                    ) : (
+                                        <option value="" disabled>Không có lớp học</option>
+                                    )}
                                 </select>
                             </div>
+
                         </div>
 
                         <div className="dayOfweek_Period_Room">
@@ -254,7 +228,7 @@ const Tea_CreateNoteti = () => {
                                     value={week}
                                     onChange={(e) => setWeek(e.target.value)}
                                     required
-                                    placeholder='Nhập tuần'
+                                    placeholder="Nhập tuần"
                                 />
                             </div>
                         </div>
@@ -265,7 +239,7 @@ const Tea_CreateNoteti = () => {
                                 value={note}
                                 onChange={(e) => setNote(e.target.value)}
                                 required
-                                placeholder='Lý do'
+                                placeholder="Lý do"
                             />
                         </div>
 

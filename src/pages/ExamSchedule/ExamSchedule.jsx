@@ -5,7 +5,6 @@ const ExamSchedule = () => {
     const [semesters, setSemesters] = useState([]); // Danh sách học kỳ
     const [selectedSemester, setSelectedSemester] = useState(''); // Học kỳ đã chọn
     const [examData, setExamData] = useState([]); // Dữ liệu lịch thi
-    const username = localStorage.getItem('username'); // Lấy username từ localStorage
 
     // Lấy danh sách học kỳ từ API
     useEffect(() => {
@@ -15,7 +14,7 @@ const ExamSchedule = () => {
             .catch(error => console.error('Error fetching semesters:', error));
     }, []);
 
-    // Lọc dữ liệu theo học kỳ và sinh viên
+    // Xử lý khi chọn học kỳ
     const handleFilterChange = () => {
         if (!selectedSemester) {
             setExamData([]); // Nếu chưa chọn học kỳ, không hiển thị dữ liệu
@@ -26,40 +25,33 @@ const ExamSchedule = () => {
         fetch('http://localhost:5000/examSchedule')
             .then(response => response.json())
             .then(data => {
-                console.log('Exam Schedule Data:', data); // Kiểm tra dữ liệu lịch thi
+                // Lọc dữ liệu theo học kỳ
+                const filteredData = data.filter(
+                    (item) => item.semesterName.trim() === selectedSemester.trim()
+                );
 
-                const examSchedule = data || []; // Dữ liệu lịch thi từ API
-
-                // Lọc dữ liệu theo học kỳ và sinh viên
-                const filteredData = examSchedule.filter(item => {
-                    const semesterName = item.semesterName.trim(); // Loại bỏ khoảng trắng thừa
-                    const selected = selectedSemester.trim(); // Loại bỏ khoảng trắng thừa
-                    const studentInExam = item.students.includes(username); // Kiểm tra sinh viên có trong kỳ thi
-
-                    return (
-                        semesterName === selected && // Kiểm tra học kỳ
-                        studentInExam // Kiểm tra sinh viên có trong danh sách thi
-                    );
-                });
-
-                if (filteredData.length === 0) {
-                    setExamData([]); // Nếu không có dữ liệu, đặt dữ liệu trống
-                    return;
-                }
+                // Sắp xếp dữ liệu theo ngày thi
                 const sortedData = filteredData.sort((a, b) => {
-                    const dateA = new Date(a.examDate); // Chuyển đổi ngày của mục A
-                    const dateB = new Date(b.examDate); // Chuyển đổi ngày của mục B
-                    return dateA - dateB; // Sắp xếp tăng dần
+                    const dateA = new Date(a.examDate);
+                    const dateB = new Date(b.examDate);
+                    return dateA - dateB;
                 });
 
                 setExamData(sortedData);
-
-                setExamData(filteredData); // Cập nhật dữ liệu
             })
             .catch(error => {
-                console.error('Error fetching examSchedule:', error);
+                console.error('Error fetching exam schedule:', error);
                 setExamData([]); // Nếu lỗi, đặt dữ liệu trống
             });
+    };
+
+    // Định dạng ngày thi thành DD/MM/YYYY
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     };
 
     return (
@@ -97,7 +89,7 @@ const ExamSchedule = () => {
                     <tbody>
                         {examData.map((row, index) => (
                             <tr key={index}>
-                                <td>{row.examDate}</td>
+                                <td>{formatDate(row.examDate)}</td>
                                 <td>{row.subjectID}</td>
                                 <td>{row.subjectname}</td>
                                 <td>{row.examTypeName}</td>

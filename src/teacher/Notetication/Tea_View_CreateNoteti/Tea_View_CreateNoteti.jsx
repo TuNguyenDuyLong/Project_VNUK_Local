@@ -71,7 +71,12 @@ const Tea_View_CreateNoteti = () => {
                                                 <div><strong>Phòng học:</strong> {notification.room}</div>
                                                 <div><strong>Tuần học:</strong> {notification.week}</div>
                                                 <div><strong>Thứ:</strong> {notification.dayOfWeek}</div>
-                                                <div><strong>Tiết học:</strong> {notification.classPeriod}</div>
+                                                <div>
+                                                    <strong>Tiết học:</strong>{" "}
+                                                    {notification.classPeriods?.length > 0
+                                                        ? notification.classPeriods.join(", ")
+                                                        : "Không có tiết học"}
+                                                </div>
                                                 <div><strong>Thông báo:</strong> {notification.note}</div>
 
                                             </div>
@@ -93,17 +98,13 @@ const Tea_View_CreateNoteti = () => {
                                                 <div><strong>Lớp:</strong> {notification.class}</div>
                                                 <div><strong>Phòng học:</strong> {notification.room}</div>
                                                 <div><strong>Tuần học:</strong> {notification.week}</div>
+                                                <div><strong>Thứ:</strong> {notification.dayOfWeek}</div>
                                                 <div>
-                                                    <strong>Thứ:</strong> {notification.dayOfWeek}
+                                                    <strong>Tiết học:</strong>{" "}
+                                                    {notification.classPeriods?.length > 0
+                                                        ? notification.classPeriods.join(", ")
+                                                        : "Không có tiết học"}
                                                 </div>
-                                                <div>
-                                                    <strong>Tiết học:</strong>
-                                                    {notification.classPeriods.map((period, index) => (
-                                                        <span key={index}>{period}{index < notification.classPeriods.length - 1 ? ', ' : ''}</span>
-                                                    ))}
-                                                </div>
-
-                                                <div><strong>Tiết học:</strong> {notification.classPeriod}</div>
                                                 <div><strong>Thông báo:</strong> {notification.note}</div>
 
                                             </div>

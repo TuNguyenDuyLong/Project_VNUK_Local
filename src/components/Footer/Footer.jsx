@@ -4,36 +4,37 @@ import './Footer.scss';
 const Footer = () => {
     return (
         <footer className="footer">
-            <div className="footer-content">
-                <div className="footer-section">
-                    <h3>Trường Đại Học ABC</h3>
-                    <p>Chúng tôi cung cấp các chương trình học chất lượng cao với đội ngũ giảng viên uy tín.</p>
-                </div>
-                <div className="footer-section">
-                    <h3>Liên Hệ</h3>
-                    <ul>
-                        <li>Email: support@university.com</li>
-                        <li>Phone: (123) 456-7890</li>
-                        <li>Địa chỉ: Số 123, Đường ABC, TP. HCM</li>
-                    </ul>
-                </div>
-                <div className="footer-section">
-                    <h3>Kết Nối</h3>
-                    <div className="social-icons">
-                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-linkedin"></i>
-                        </a>
+            <div className="grid">
+                <div className="grid__row">
+                    <div className="grid__column-2-5">
+                        <h4 className='footer_title_1'>Viện Nghiên cứu và Đào tạo Việt – Anh</h4>
+                        <ul>
+                            <li><a href="/gioi-thieu">Giới thiệu</a></li>
+                            <li><a href="/tuyen-sinh">Tuyển sinh</a></li>
+                            <li><a href="/chinh-sach">Chính sách</a></li>
+                            <li><a href="/do-an">Đồ án</a></li>
+                        </ul>
+                    </div>
+
+                    <div className="grid__column-2-5">
+                        <h4>Liên hệ</h4>
+                        <ul>
+                            <li><a href="/lien-he">Thông tin liên hệ</a></li>
+                            <li><a href="mailto:contact@university.edu">Email: contact@university.edu</a></li>
+                            <li><a href="tel:+84123456789">Điện thoại: 0123456789</a></li>
+                        </ul>
+                    </div>
+
+                    <div className="grid__column-2-5">
+                        <h4>Tài nguyên học tập</h4>
+                        <ul>
+                            <li><a href="/thu-vien">Thư viện</a></li>
+                            <li><a href="/online-courses">Khóa học trực tuyến</a></li>
+                            <li><a href="/chuong-trinh-hoc">Chương trình học</a></li>
+                            <li><a href="/sinh-vien">Dành cho sinh viên</a></li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            <div className="footer-bottom">
-                <p>&copy; 2024 Trường Đại Học ABC. All rights reserved.</p>
             </div>
         </footer>
     );

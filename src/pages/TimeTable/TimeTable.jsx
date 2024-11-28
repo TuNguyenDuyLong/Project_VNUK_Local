@@ -4,55 +4,47 @@ import './TimeTable.scss';
 const TimeTable = () => {
     const [semesters, setSemesters] = useState([]); // Danh sách học kỳ
     const [selectedSemester, setSelectedSemester] = useState(''); // Học kỳ đã chọn
-    const [tableData, setTableData] = useState([]); // Dữ liệu thời khóa biểu sau khi lọc
+    const [tableData, setTableData] = useState([]); // Dữ liệu thời khóa biểu
     const username = localStorage.getItem('username'); // Lấy username từ localStorage
+    const [error, setError] = useState(null); // Lưu lỗi (nếu có)
 
     // Lấy danh sách học kỳ từ API
     useEffect(() => {
         fetch('http://localhost:5000/semesters')
             .then(response => response.json())
             .then(data => setSemesters(data))
-            .catch(error => console.error('Error fetching semesters:', error));
+            .catch(error => {
+                console.error('Error fetching semesters:', error);
+                setError('Không thể tải danh sách học kỳ. Vui lòng thử lại sau.');
+            });
     }, []);
 
-    // Xử lý khi chọn học kỳ
+    // Lấy thời khóa biểu theo học kỳ
     const handleFilterChange = () => {
         if (!selectedSemester) {
             setTableData([]); // Nếu chưa chọn học kỳ, không hiển thị dữ liệu
             return;
         }
 
-        // Lấy dữ liệu thời khóa biểu từ API
+        setError(null); // Reset lỗi trước khi fetch dữ liệu
         fetch('http://localhost:5000/timetable')
             .then(response => response.json())
             .then(data => {
-                const timetable = data[0]?.timetable || []; // Lấy dữ liệu thời khóa biểu từ API
-
-                // Lọc dữ liệu theo học kỳ và sinh viên
-                const filteredData = timetable.filter(item => {
-                    return (
-                        item.semestersName === selectedSemester && // Kiểm tra học kỳ
-                        item.students && item.students.includes(username) // Kiểm tra sinh viên
-                    );
-                });
-
-                // Sắp xếp theo ngày trong tuần
-                const daysOfWeek = [
-                    'Thứ 2',
-                    'Thứ 3',
-                    'Thứ 4',
-                    'Thứ 5',
-                    'Thứ 6',
-                    'Thứ 7',
-                    'Chủ nhật',
-                ];
-                const sortedData = filteredData.sort(
-                    (a, b) =>
-                        daysOfWeek.indexOf(a.dayOfWeekName) -
-                        daysOfWeek.indexOf(b.dayOfWeekName)
+                // Lọc thời khóa biểu theo học kỳ và username
+                const filteredData = data.filter(item =>
+                    item.semestersName === selectedSemester &&
+                    (!item.students || item.students.includes(username))
                 );
 
-                // Tính rowspan cho các ô "Thứ"
+                // Sắp xếp theo thứ tự ngày trong tuần
+                const daysOfWeek = [
+                    'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật'
+                ];
+                const sortedData = filteredData.sort(
+                    (a, b) => daysOfWeek.indexOf(a.dayOfWeekName) - daysOfWeek.indexOf(b.dayOfWeekName)
+                );
+
+                // Tính rowspan cho cột "Thứ"
                 const groupedData = [];
                 let lastDay = null;
                 let rowspan = 0;
@@ -75,11 +67,11 @@ const TimeTable = () => {
                     }
                 });
 
-                setTableData(groupedData); // Cập nhật dữ liệu
+                setTableData(groupedData);
             })
             .catch(error => {
                 console.error('Error fetching timetable:', error);
-                setTableData([]); // Nếu lỗi, đặt dữ liệu trống
+                setError('Không thể tải thời khóa biểu. Vui lòng thử lại sau.');
             });
     };
 
@@ -102,6 +94,8 @@ const TimeTable = () => {
                 <button onClick={handleFilterChange}>Tra cứu</button>
             </div>
 
+            {error && <p className="error-message">{error}</p>}
+
             {tableData.length > 0 ? (
                 <table className="result-table">
                     <thead>
@@ -119,7 +113,7 @@ const TimeTable = () => {
                     </thead>
                     <tbody>
                         {tableData.map((row, index) => (
-                            <tr key={index} className='detail_timetable'>
+                            <tr key={index} className="detail_timetable">
                                 {row.rowspan > 0 && (
                                     <td rowSpan={row.rowspan}>{row.dayOfWeekName}</td>
                                 )}
@@ -136,28 +130,30 @@ const TimeTable = () => {
                     </tbody>
                 </table>
             ) : (
-                <table className="result-table">
-                    <thead>
-                        <tr>
-                            <th>Thứ</th>
-                            <th>Tên học phần</th>
-                            <th>Tên giảng viên</th>
-                            <th>Lớp tín chỉ</th>
-                            <th>Tín chỉ</th>
-                            <th>Tuần học</th>
-                            <th>Phòng</th>
-                            <th>Tiết</th>
-                            <th>Ghi chú</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr className="Null_value">
-                            <td colSpan="10" style={{ textAlign: 'center' }}>
-                                Không có dữ liệu nào được tìm thấy
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                !error && (
+                    <table className="result-table">
+                        <thead>
+                            <tr>
+                                <th>Thứ</th>
+                                <th>Tên học phần</th>
+                                <th>Tên giảng viên</th>
+                                <th>Lớp tín chỉ</th>
+                                <th>Tín chỉ</th>
+                                <th>Tuần học</th>
+                                <th>Phòng</th>
+                                <th>Tiết</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className="Null_value">
+                                <td colSpan="9" style={{ textAlign: 'center' }}>
+                                    Không có dữ liệu nào được tìm thấy
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                )
             )}
         </div>
     );

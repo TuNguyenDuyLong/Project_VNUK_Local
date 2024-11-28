@@ -6,13 +6,17 @@ const TimeTable = () => {
     const [selectedSemester, setSelectedSemester] = useState(''); // Học kỳ đã chọn
     const [tableData, setTableData] = useState([]); // Dữ liệu thời khóa biểu sau khi lọc
     const username = localStorage.getItem('username'); // Lấy username từ localStorage
+    const [error, setError] = useState(null); // Lưu lỗi (nếu có)
 
     // Lấy danh sách học kỳ từ API
     useEffect(() => {
         fetch('http://localhost:5000/semesters')
             .then(response => response.json())
             .then(data => setSemesters(data))
-            .catch(error => console.error('Error fetching semesters:', error));
+            .catch(error => {
+                console.error('Error fetching semesters:', error);
+                setError('Không thể tải danh sách học kỳ. Vui lòng thử lại sau.');
+            });
     }, []);
 
     // Xử lý khi chọn học kỳ
@@ -22,23 +26,17 @@ const TimeTable = () => {
             return;
         }
 
+        setError(null); // Reset lỗi trước khi fetch dữ liệu
         // Lấy dữ liệu thời khóa biểu từ API
         fetch('http://localhost:5000/tea_timetable')
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Kiểm tra dữ liệu trả về từ API
-                const tea_timetable = (data.length > 0 && data[0].tea_timetable) || []; // Lấy dữ liệu thời khóa biểu từ API
+                const filteredData = data.filter(item =>
+                    item.semestersName === selectedSemester &&
+                    (!item.teachers || item.teachers.includes(username))
+                );
 
-                // Lọc dữ liệu theo học kỳ và giảng viên
-                const filteredData = tea_timetable.filter(item => {
-                    return (
-                        item.semestersName === selectedSemester && // Kiểm tra học kỳ
-                        item.teachers && item.teachers.includes(username)
-                    );
-                });
-
-                console.log(filteredData); // Kiểm tra dữ liệu đã lọc
-
+                // Lọc dữ liệu theo học kỳ và giảng viê
                 // Sắp xếp theo ngày trong tuần
                 const daysOfWeek = [
                     'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ nhật',
@@ -75,7 +73,7 @@ const TimeTable = () => {
             })
             .catch(error => {
                 console.error('Error fetching timetable:', error);
-                setTableData([]); // Nếu lỗi, đặt dữ liệu trống
+                setError('Không thể tải thời khóa biểu. Vui lòng thử lại sau.');
             });
 
     };

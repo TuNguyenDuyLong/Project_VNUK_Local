@@ -5,7 +5,6 @@ const ExamSchedule = () => {
     const [semesters, setSemesters] = useState([]); // Danh sách học kỳ
     const [selectedSemester, setSelectedSemester] = useState(''); // Học kỳ đã chọn
     const [examData, setExamData] = useState([]); // Dữ liệu lịch coi thi
-    const username = localStorage.getItem('username'); // Lấy username từ localStorage
 
     // Lấy danh sách học kỳ từ API
     useEffect(() => {
@@ -26,47 +25,34 @@ const ExamSchedule = () => {
         fetch('http://localhost:5000/tea_examSchedule')
             .then(response => response.json())
             .then(data => {
-                console.log('Exam Tea_Schedule Data:', data); // Kiểm tra dữ liệu gốc
+                // Lọc dữ liệu theo học kỳ
+                const filteredData = data.filter(
+                    (item) => item.semesterName.trim() === selectedSemester.trim()
+                );
 
-                // Đảm bảo teachers luôn là mảng và loại bỏ khoảng trắng
-                const Tea_examSchedule = data.map(item => ({
-                    ...item,
-                    semesterName: item.semesterName?.trim() || '', // Loại bỏ khoảng trắng thừa
-                    teachers: Array.isArray(item.teachers) ? item.teachers.map(t => t.trim()) : [], // Đảm bảo teachers là mảng
-                }));
-
-                // Lọc dữ liệu theo học kỳ và giảng viên
-                const filteredData = Tea_examSchedule.filter(item => {
-                    const semesterName = item.semesterName?.toLowerCase() || ''; // Chuyển đổi về chữ thường
-                    const selected = selectedSemester.trim().toLowerCase(); // Chuyển đổi chọn học kỳ về chữ thường
-                    const TeacherInExam = Array.isArray(item.teachers) && item.teachers.some(teacher => teacher.trim() === username.trim());
-
-                    console.log(`Checking semesterName: "${semesterName}" === "${selected}"`);
-                    console.log(`Checking invigilator: "${username}" in`, item.teachers);
-
-                    return semesterName === selected && TeacherInExam;
-                });
-
+                // Sắp xếp dữ liệu theo ngày thi
                 const sortedData = filteredData.sort((a, b) => {
-                    const dateA = new Date(a.examDate); // Chuyển đổi ngày của mục A
-                    const dateB = new Date(b.examDate); // Chuyển đổi ngày của mục B
-                    return dateA - dateB; // Sắp xếp tăng dần
+                    const dateA = new Date(a.examDate);
+                    const dateB = new Date(b.examDate);
+                    return dateA - dateB;
                 });
 
-                console.log('Filtered & Sorted Data:', sortedData);
-
-                setExamData(sortedData); // Cập nhật dữ liệu sau khi sắp xếp
-
-                console.log('Filtered Data:', filteredData);
-
-
-                setExamData(filteredData); // Cập nhật dữ liệu
+                setExamData(sortedData);
             })
-            .catch(error => {
-                console.error('Error fetching examSchedule:', error);
-                setExamData([]); // Xử lý khi lỗi xảy ra
-            });
 
+            .catch(error => {
+                console.error('Error fetching exam schedule:', error);
+                setExamData([]); // Nếu lỗi, đặt dữ liệu trống
+            });
+    };
+
+    // Định dạng ngày thi thành DD/MM/YYYY
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     };
 
     return (
@@ -106,7 +92,7 @@ const ExamSchedule = () => {
                     <tbody>
                         {examData.map((row, index) => (
                             <tr key={index}>
-                                <td>{new Date(row.examDate).toLocaleDateString()}</td>
+                                <td>{formatDate(row.examDate)}</td>
                                 <td>{row.subjectID}</td>
                                 <td>{row.subjectname}</td>
                                 <td>{row.examTypeName}</td>

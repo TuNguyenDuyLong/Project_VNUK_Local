@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import ScrollToTop from './util/ScrollToTop';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Navbar from './pages/Navbar/Navbar';
 import Tea_Navbar from './teacher/Tea_Navbar/Tea_Navbar';
+import { useUser } from './components/Header/Login/UserContext';
+// Import context
 
 // Các trang dành cho sinh viên
 import Home from './pages/Home/Home';
@@ -24,26 +26,19 @@ import Tea_View_CreateNoteti from './teacher/Notetication/Tea_View_CreateNoteti/
 import Tea_CreateNoteti_com from './teacher/Notetication/Tea_CreateNoteti_com/Tea_CreateNoteti_com';
 import Tea_CreateNoteti_session from './teacher/Notetication/Tea_CreateNoteti_session/Tea_CreateNoteti_session';
 
-
 const App = () => {
-  const [role, setRole] = useState(null);
+  const { user, login } = useUser(); // Lấy thông tin người dùng từ context
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userRole = localStorage.getItem('role');
-
-    if (!token) {
-      setRole(null);
-    } else {
-      setRole(userRole);
+    if (!user) {
+      navigate('/'); // Quay về trang chính nếu chưa đăng nhập
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    setRole(null);
+    // Gọi API hoặc xóa trạng thái từ context
+    login(null, null); // Reset user
     navigate('/');
   };
 
@@ -53,11 +48,11 @@ const App = () => {
       <ScrollToTop />
 
       {/* Header */}
-      <Header setRole={setRole} handleLogout={handleLogout} />
+      <Header handleLogout={handleLogout} />
 
       {/* Navbar dựa trên vai trò */}
-      {role === 'student' && <Navbar />}
-      {role === 'teacher' && <Tea_Navbar />}
+      {user?.role === 'student' && <Navbar />}
+      {user?.role === 'teacher' && <Tea_Navbar />}
 
       {/* Route chính */}
       <Routes>
@@ -68,7 +63,7 @@ const App = () => {
         <Route path="/admissions" element={<Admissions />} />
 
         {/* Route dành cho sinh viên */}
-        {role === 'student' && (
+        {user?.role === 'student' && (
           <>
             <Route path="/timetable" element={<TimeTable />} />
             <Route path="/viewnoteti" element={<ViewNoteti />} />
@@ -77,7 +72,7 @@ const App = () => {
         )}
 
         {/* Route dành cho giảng viên */}
-        {role === 'teacher' && (
+        {user?.role === 'teacher' && (
           <>
             <Route path="/tea_timetable" element={<Tea_TimeTable />} />
             <Route path="/tea_viewnoteti" element={<Tea_ViewNoteti />} />
@@ -89,8 +84,6 @@ const App = () => {
           </>
         )}
       </Routes>
-
-      {/* Footer */}
       <Footer />
     </div>
   );
